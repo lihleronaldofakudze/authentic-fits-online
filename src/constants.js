@@ -10,3 +10,13 @@ export const links = [
   "Shorts",
   "Jackets",
 ];
+
+export const customerService = [
+  "Contact Us",
+  "Orders & Delivery",
+  "Returns & Refunds",
+  "Terms & Conditions",
+  "Privacy Policy",
+];
+
+export const about = ["About Us", "Sponsors", "Owners"];

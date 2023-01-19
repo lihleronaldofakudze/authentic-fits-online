@@ -19,11 +19,13 @@ import {
   MdMenu,
   MdSearch,
 } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import { categories } from "../constants";
 
 const NavbarComponent = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const navigate = useNavigate();
   return (
     <AppBar color="inherit" elevation={0} position="relative">
       <Toolbar>
@@ -47,7 +49,12 @@ const NavbarComponent = () => {
             )}
           </Grid>
           <Grid item container justifyContent={"center"} xs={4}>
-            <Typography variant={isMobile ? "body1" : "h4"} fontWeight={"bold"}>
+            <Typography
+              variant={isMobile ? "body1" : "h4"}
+              fontWeight={"bold"}
+              onClick={() => navigate("/")}
+              sx={{ cursor: "pointer" }}
+            >
               AUTHENTICFITS
             </Typography>
           </Grid>
@@ -62,7 +69,7 @@ const NavbarComponent = () => {
               <Box />
             ) : (
               <>
-                <Avatar />
+                <Avatar srcSet="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Flag_of_Eswatini.svg/255px-Flag_of_Eswatini.svg.png" />
                 <IconButton sx={{ ml: 1 }}>
                   <MdPerson />
                 </IconButton>

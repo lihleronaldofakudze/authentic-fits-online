@@ -42,7 +42,13 @@ const NavbarComponent = () => {
               </Stack>
             ) : (
               categories.map((category) => (
-                <Button color="inherit" key={category}>
+                <Button
+                  color="inherit"
+                  key={category}
+                  onClick={() =>
+                    navigate(`/category/${category.toLocaleLowerCase()}`)
+                  }
+                >
                   {category}
                 </Button>
               ))

@@ -1,4 +1,4 @@
-export const categories = ["Top", "Bottom", "Sweaters", "Tracksuits"];
+export const categories = ["Tops", "Bottoms", "Sweaters", "Tracksuits"];
 
 export const links = [
   "Sale",

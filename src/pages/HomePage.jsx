@@ -23,7 +23,7 @@ const HomePage = () => {
 
   useEffect(() => {
     sanity
-      .fetch('*[_type == "clothing"]{..., clothCategory->{...}}')
+      .fetch('*[_type == "clothing"]')
       .then(setClothing)
       .catch(console.error);
   }, []);
@@ -49,6 +49,15 @@ const HomePage = () => {
         other={true}
         isMobile={isMobile}
       />
+      <Typography
+        variant="h4"
+        fontWeight={"bold"}
+        textAlign="center"
+        gutterBottom
+        my={4}
+      >
+        Available Products
+      </Typography>
       <Stack
         direction="row"
         alignItems={"center"}

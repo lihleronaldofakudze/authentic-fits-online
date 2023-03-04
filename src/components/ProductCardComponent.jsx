@@ -32,7 +32,7 @@ const ProductCardComponent = ({ cloth }) => {
         />
       </Box>
       <Box>
-        <Typography color="textSecondary">{cloth.category}</Typography>
+        <Typography color="textSecondary">{cloth.category.title}</Typography>
         <Typography fontWeight={"bold"}>{cloth.title}</Typography>
         <Typography gutterBottom>{cloth.shortDescription}</Typography>
         <Typography variant="h5" fontWeight={"bold"}>

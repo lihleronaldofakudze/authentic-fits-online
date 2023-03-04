@@ -1,5 +1,3 @@
-export const categories = ["Tops", "Bottoms", "Sweaters", "Tracksuits"];
-
 export const links = [
   "Sale",
   "New In",

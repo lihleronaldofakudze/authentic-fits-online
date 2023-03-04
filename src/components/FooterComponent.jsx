@@ -8,8 +8,10 @@ import {
   BsPinterest,
   BsYoutube,
 } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 const FooterComponent = () => {
+  const navigate = useNavigate();
   return (
     <Container
       maxWidth="xl"
@@ -22,12 +24,26 @@ const FooterComponent = () => {
     >
       <Container>
         <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Typography variant="h5" fontWeight="bold">
+              We sell both to Kingdom of Eswatini and South Africa
+            </Typography>
+          </Grid>
           <Grid item md={4} xs={12}>
             <Typography variant="h6" gutterBottom>
               CUSTOMER SERVICE
             </Typography>
             {customerService.map((service, index) => (
-              <Typography key={index} gutterBottom sx={{ cursor: "pointer" }}>
+              <Typography
+                key={index}
+                gutterBottom
+                sx={{ cursor: "pointer" }}
+                onClick={() =>
+                  navigate(
+                    service.toLowerCase().replace(" ", "_").replace("&", "and")
+                  )
+                }
+              >
                 {service}
               </Typography>
             ))}
@@ -37,7 +53,12 @@ const FooterComponent = () => {
               ABOUT AUTHENTICFITS
             </Typography>
             {about.map((item, index) => (
-              <Typography key={index} gutterBottom sx={{ cursor: "pointer" }}>
+              <Typography
+                key={index}
+                gutterBottom
+                sx={{ cursor: "pointer" }}
+                onClick={() => navigate("")}
+              >
                 {item}
               </Typography>
             ))}
@@ -52,20 +73,17 @@ const FooterComponent = () => {
               FOLLOW US
             </Typography>
             <Stack direction={"row"}>
-              <IconButton>
+              <IconButton
+                href="https://www.instagram.com/authenticfits.swz/"
+                target="_blank"
+              >
                 <BsInstagram color="white" />
               </IconButton>
-              <IconButton>
+              <IconButton
+                href="https://www.facebook.com/profile.php?id=100088524505723"
+                target="_blank"
+              >
                 <BsFacebook color="white" />
-              </IconButton>
-              <IconButton>
-                <BsTwitter color="white" />
-              </IconButton>
-              <IconButton>
-                <BsPinterest color="white" />
-              </IconButton>
-              <IconButton>
-                <BsYoutube color="white" />
               </IconButton>
             </Stack>
           </Grid>

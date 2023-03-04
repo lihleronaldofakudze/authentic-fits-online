@@ -10,42 +10,41 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import TopLinksComponent from "../components/TopLinksComponent";
-import adOne from "../assets/fitsad1.jpeg";
-import adTwo from "../assets/fitsad2.jpeg";
 import HomeAdComponent from "../components/HomeAdComponent";
-import sanity from "../services/sanity";
+import sanity, { urlFor } from "../services/sanity";
 import ProductCardComponent from "../components/ProductCardComponent";
 
 const HomePage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [clothing, setClothing] = useState([]);
+  const [adverts, setAdverts] = useState([]);
 
   useEffect(() => {
     sanity
-      .fetch('*[_type == "clothing"]')
+      .fetch('*[_type == "clothing"]{..., category->{title}}')
       .then(setClothing)
       .catch(console.error);
+    sanity.fetch('*[_type == "advert"]').then(setAdverts).catch(console.error);
   }, []);
 
   return (
     <Container maxWidth="xl" sx={{ mb: 3 }}>
+      {console.log(clothing)}
       {isMobile ? <Box /> : <TopLinksComponent />}
       <HomeAdComponent
-        image={adOne}
-        title={"EXTRA 20% OFF SALE: FINAL REDUCTIONS"}
-        subtitle={
-          "Shop the world’s greatest designers on sale with an extra 20% off. T&Cs apply; discount applied at checkout. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose"
-        }
+        image={urlFor(adverts[0]?.image).url()}
+        title={adverts[0]?.title}
+        subtitle={adverts[0]?.description}
+        link={adverts[0]?.link}
         other={false}
         isMobile={isMobile}
       />
       <HomeAdComponent
-        image={adTwo}
-        title={"Best Quality Fits"}
-        subtitle={
-          "Shop the world’s greatest designers on sale with an extra 20% off. T&Cs apply; discount applied at checkout. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose"
-        }
+        image={urlFor(adverts[1]?.image).url()}
+        title={adverts[1]?.title}
+        subtitle={adverts[1]?.description}
+        link={adverts[1]?.link}
         other={true}
         isMobile={isMobile}
       />
@@ -75,7 +74,7 @@ const HomePage = () => {
           </Button>
         )}
       </Stack>
-      <Grid container sx={{ my: 2 }}>
+      <Grid container direction="row" sx={{ my: 2 }}>
         <Grid item md={3} xs={12}>
           {clothing?.map((cloth, index) => (
             <ProductCardComponent key={index} cloth={cloth} />

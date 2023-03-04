@@ -20,12 +20,21 @@ import {
   MdSearch,
 } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { categories } from "../constants";
+import sa from "../assets/download.png";
 
 const NavbarComponent = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    sanity
+      .fetch('*[_type == "category"][0...5]{title}')
+      .then(setCategories)
+      .catch(console.error);
+  }, []);
+
   return (
     <AppBar color="inherit" elevation={0} position="relative">
       <Toolbar>
@@ -55,14 +64,23 @@ const NavbarComponent = () => {
             )}
           </Grid>
           <Grid item container justifyContent={"center"} xs={4}>
-            <Typography
-              variant={isMobile ? "body1" : "h4"}
-              fontWeight={"bold"}
-              onClick={() => navigate("/")}
-              sx={{ cursor: "pointer" }}
-            >
-              AUTHENTICFITS
-            </Typography>
+            <Stack justifyContent={"center"} alignItems="center">
+              <Typography
+                variant={isMobile ? "body1" : "h4"}
+                fontWeight={"bold"}
+                onClick={() => navigate("/")}
+                sx={{ cursor: "pointer" }}
+              >
+                AUTHENTICFITS
+              </Typography>
+              <Typography
+                variant={"subtitle"}
+                onClick={() => navigate("/")}
+                sx={{ cursor: "pointer" }}
+              >
+                We sell both to Kingdom of Eswatini and South Africas
+              </Typography>
+            </Stack>
           </Grid>
           <Grid
             item
@@ -74,12 +92,13 @@ const NavbarComponent = () => {
             {isMobile ? (
               <Box />
             ) : (
-              <>
+              <Stack direction="row">
                 <Avatar srcSet="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Flag_of_Eswatini.svg/255px-Flag_of_Eswatini.svg.png" />
+                <Avatar srcSet={sa} sx={{ ml: 1 }} />
                 <IconButton sx={{ ml: 1 }}>
                   <MdPerson />
                 </IconButton>
-              </>
+              </Stack>
             )}
             <IconButton sx={{ ml: isMobile ? 0 : 1 }}>
               <MdFavorite />

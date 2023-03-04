@@ -1,7 +1,7 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
 import React from "react";
 
-const HomeAdComponent = ({ image, title, subtitle, other, isMobile }) => {
+const HomeAdComponent = ({ image, title, subtitle, other, isMobile, link }) => {
   return (
     <Grid container spacing={4} sx={{ my: 1 }}>
       <Grid item md={6} xs={12} order={{ md: other ? 1 : 2 }}>
@@ -41,6 +41,7 @@ const HomeAdComponent = ({ image, title, subtitle, other, isMobile }) => {
           color="inherit"
           sx={{ mt: 2 }}
           fullWidth={isMobile ? true : false}
+          onClick={() => window.open(link)}
         >
           Shop Now
         </Button>
